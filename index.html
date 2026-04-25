@@ -37,7 +37,7 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         .hidden { display: none !important; }
 
-        /* --- 首页：小提琴与渐变字体 --- */
+        /* --- 首页样式 --- */
         .hero-icon { font-size: 75px; text-align: center; animation: float 3s ease-in-out infinite; margin-top: 30px; }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
         
@@ -48,37 +48,37 @@
             letter-spacing: -1px;
         }
 
-        .hero-intro { 
-            font-size: 1.05rem; line-height: 1.85; color: #4b5155; text-align: justify; 
-            margin: 30px 0; padding: 25px 0; border-top: 1px solid rgba(0,0,0,0.06); border-bottom: 1px solid rgba(0,0,0,0.06);
-        }
+        .hero-intro { font-size: 1.05rem; line-height: 1.85; color: #4b5155; text-align: justify; margin: 30px 0; padding: 25px 0; border-top: 1px solid rgba(0,0,0,0.06); border-bottom: 1px solid rgba(0,0,0,0.06); }
 
-        .btn-main { 
-            background: #1d1d1f; color: white; border: none; padding: 22px; border-radius: 16px; 
-            font-weight: 600; width: 100%; font-size: 1.15rem; cursor: pointer; letter-spacing: 4px; margin-top: auto;
-        }
+        .btn-main { background: #1d1d1f; color: white; border: none; padding: 22px; border-radius: 16px; font-weight: 600; width: 100%; font-size: 1.15rem; cursor: pointer; letter-spacing: 4px; margin-top: auto; }
 
-        /* --- 问卷：七阶选项 --- */
+        /* --- 问卷样式 --- */
         .q-text { font-size: 1.55rem; font-family: var(--serif); line-height: 1.5; min-height: 150px; font-weight: 700; text-align: center; display: flex; align-items: center; justify-content: center; }
         .scale-container { display: flex; justify-content: space-between; align-items: center; margin: 60px 0; }
         .dot { border: 2.5px solid; border-radius: 50%; cursor: pointer; transition: all 0.2s; background: #fff; }
         .s3 { width: 54px; height: 54px; } .s2 { width: 42px; height: 42px; } .s1 { width: 32px; height: 32px; }
         .agree { border-color: #00b894; color: #00b894; } .disagree { border-color: #ff7675; color: #ff7675; } .neutral { border-color: #b2bec3; width: 26px; height: 26px; color: #b2bec3; }
 
-        /* --- 结果页 --- */
+        /* --- 结果页样式 --- */
         .res-mbti { font-family: var(--serif); font-style: italic; color: var(--p); font-size: 1.6rem; letter-spacing: 6px; font-weight: 800; text-align: center; }
         .res-name { font-family: var(--serif); font-size: 3.2rem; margin: 5px 0 10px 0; text-align: center; }
-        .res-desc { font-family: var(--serif); line-height: 1.8; font-size: 1.05rem; background: rgba(255,255,255,0.6); padding: 25px; border-radius: 18px; border: 1px solid rgba(0,0,0,0.05); }
-        .trait-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
-        .trait-card { background: white; border: 1px solid #f0f0f5; padding: 18px 10px; border-radius: 14px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
         
-        /* --- 新增：关系板块样式 --- */
-        .rel-container { display: flex; gap: 12px; margin-top: 15px; }
-        .rel-box { flex: 1; padding: 15px; border-radius: 14px; background: white; border: 1px solid #f0f0f5; text-align: center; }
-        .rel-label { font-size: 0.75rem; font-weight: bold; color: #999; margin-bottom: 8px; letter-spacing: 1px; }
-        .rel-name { font-family: var(--serif); font-size: 1.1rem; color: #1d1d1f; }
+        .section-title { font-size: 0.85rem; font-weight: 800; color: var(--p); margin: 25px 0 10px 0; letter-spacing: 2px; text-transform: uppercase; border-left: 3px solid var(--p); padding-left: 10px; }
+        
+        .res-desc { font-family: var(--serif); line-height: 1.8; font-size: 1.05rem; background: rgba(255,255,255,0.6); padding: 20px; border-radius: 18px; border: 1px solid rgba(0,0,0,0.05); }
+        .res-works { font-family: var(--serif); font-size: 0.95rem; color: #555; line-height: 1.6; padding: 15px; background: #f0f0f5; border-radius: 12px; margin-top: 5px; }
 
-        .chart-wrap { width: 100%; height: 300px; margin: 10px 0; }
+        .trait-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        .trait-card { background: white; border: 1px solid #f0f0f5; padding: 15px 8px; border-radius: 14px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+        .trait-card b { display: block; font-size: 1rem; margin-bottom: 3px; }
+        .trait-card span { font-size: 0.8rem; color: #636e72; }
+
+        .rel-container { display: flex; gap: 10px; margin-top: 10px; }
+        .rel-box { flex: 1; padding: 12px; border-radius: 14px; background: white; border: 1px solid #f0f0f5; text-align: center; }
+        .rel-label { font-size: 0.7rem; font-weight: bold; color: #aaa; margin-bottom: 5px; }
+        .rel-pname { font-family: var(--serif); font-size: 1rem; color: #1d1d1f; }
+
+        .chart-wrap { width: 100%; height: 280px; margin: 10px 0; }
     </style>
 </head>
 <body>
@@ -113,43 +113,132 @@
     <section id="result" class="screen hidden">
         <div id="res-mbti" class="res-mbti"></div>
         <h1 id="res-name" class="res-name"></h1>
+        
         <div class="chart-wrap"><canvas id="myChart"></canvas></div>
+
+        <div class="section-title">灵魂解析 Resonance</div>
         <div id="res-desc" class="res-desc"></div>
+
+        <div class="section-title">私藏乐谱 Repertoire</div>
+        <div id="res-works" class="res-works"></div>
+
+        <div class="section-title">思维映射 Traits</div>
         <div id="trait-grid" class="trait-grid"></div>
         
+        <div class="section-title">灵魂连接 Connection</div>
         <div class="rel-container">
             <div class="rel-box">
                 <div class="rel-label">✨ 灵魂契合</div>
-                <div id="rel-good" class="rel-name"></div>
+                <div id="rel-good" class="rel-pname"></div>
             </div>
             <div class="rel-box">
                 <div class="rel-label">🌑 渐行渐远</div>
-                <div id="rel-bad" class="rel-name"></div>
+                <div id="rel-bad" class="rel-pname"></div>
             </div>
         </div>
         
-        <p style="text-align:center; margin-top:40px; color:#bbb; cursor:pointer; font-size:0.8rem; font-weight:bold;" onclick="location.reload()">REPLAY 重新调律</p>
+        <p style="text-align:center; margin-top:40px; color:#bbb; cursor:pointer; font-size:0.8rem; font-weight:bold; padding-bottom: 30px;" onclick="location.reload()">REPLAY 重新调律</p>
     </section>
 </div>
 
 <script>
     const db = {
-        "INTJ": { name: "贝多芬", mbti: "INTJ", good: "莫扎特", bad: "格里格", desc: "你是伟大的构建者。在严谨结构中爆发惊人生命力量，用坚韧意志对抗命运。", traits: ["🏔️ 意志爆发", "🧠 逻辑缜密", "🦅 独立深邃", "🔭 远见卓识"], stats: [85, 95, 100, 92, 85, 95] },
-        "INTP": { name: "勋伯格", mbti: "INTP", good: "普罗科菲耶夫", bad: "门德尔松", desc: "理性的探险家。敢于拆解传承百年的规则，构建属于未来的逻辑体系。", traits: ["🧪 拆解重构", "📐 绝对理性", "🧱 客观严苛", "🌌 突破边界"], stats: [40, 98, 88, 95, 90, 100] },
-        "INFJ": { name: "拉威尔", mbti: "INFJ", good: "舒曼", bad: "莫扎特", desc: "完美的灵魂工匠。炽热情感浓缩在最严苛框架下，每一丝情绪都经过精确计算。", traits: ["💎 完美主义", "🧘 内敛克制", "🎨 极致细腻", "🕯️ 精神向导"], stats: [92, 85, 90, 95, 88, 92] },
-        "INFP": { name: "肖邦", mbti: "INFP", good: "柴可夫斯基", bad: "巴赫", desc: "灵魂的低语者。用纤细旋律承载深沉忧郁，在孤独中绽放灵魂之火。", traits: ["Swan 极致纤细", "🥀 浪漫幻想", "🌙 孤独美学", "❤️ 真挚共鸣"], stats: [98, 30, 85, 90, 80, 90] },
-        "ISTJ": { name: "巴赫", mbti: "ISTJ", good: "勃拉姆斯", bad: "肖邦", desc: "宇宙秩序的翻译官。在最严密复调逻辑中触碰神圣永恒，规则即是真理。", traits: ["🏛️ 规律严谨", "🔢 逻辑巅峰", "⚓ 专注可靠", "♾️ 永恒秩序"], stats: [30, 100, 95, 98, 90, 50] },
-        "ISFJ": { name: "勃拉姆斯", mbti: "ISFJ", good: "海顿", bad: "李斯特", desc: "传统的守望者。古典形式中包裹厚重人文关怀，内敛且坚定。", traits: ["🛡️ 稳重可靠", "🍷 内敛深情", "📜 敬畏传统", "⏳ 极致耐心"], stats: [85, 88, 70, 92, 85, 80] },
-        "ISTP": { name: "维瓦尔第", mbti: "ISTP", good: "格里格", bad: "柴可夫斯基", desc: "自然的捕捉者。拥有惊人专注力与实践力，擅长捕捉四季瞬时的灵感。", traits: ["⚙️ 务实高效", "⚡ 瞬间爆发", "💻 技术宅力", "🍃 自然灵性"], stats: [70, 90, 85, 88, 90, 95] },
-        "ISFP": { name: "舒伯特", mbti: "ISFP", good: "莫扎特", bad: "贝多芬", desc: "纯粹的吟游诗人。灵感如同泉水自然涌现，用音乐描绘生命中每一个动人的瞬间。", traits: ["🎨 纯真本能", "🎹 艺术灵感", "⛅ 活在当下", "🧚 不染尘埃"], stats: [92, 35, 80, 85, 82, 90] },
-        "ENTJ": { name: "李斯特", mbti: "ENTJ", good: "贝多芬", bad: "舒伯特", desc: "时代的引领者。卓越技巧与宏大远见，天生属于舞台中心，将音乐化作权杖。", traits: ["👑 领袖气质", "⚡ 技巧巅峰", "🗺️ 掌控全局", "🚀 极具开创"], stats: [88, 90, 92, 95, 98, 95] },
-        "ENTP": { name: "普罗科菲耶夫", mbti: "ENTP", good: "勋伯格", bad: "勃拉姆斯", desc: "机敏博弈者。挑战常规，用出其不意逻辑和尖锐节奏给世界带来惊喜。", traits: ["🎭 犀利幽默", "🔥 挑战传统", "🎲 灵活多变", "💡 智力驱动"], stats: [75, 85, 95, 88, 92, 100] },
-        "ENFJ": { name: "柴可夫斯基", mbti: "ENFJ", good: "舒曼", bad: "巴赫", desc: "情感共振者。真挚能击中人心最柔软的地方，温暖且富有力量。", traits: ["🔥 极致热忱", "🤝 同理心强", "🌟 极具魅力", "📢 情感领袖"], stats: [95, 50, 80, 90, 95, 92] },
-        "ENFP": { name: "舒曼", mbti: "ENFP", good: "拉威尔", bad: "海顿", desc: "永恒追梦人。世界充满幻想与炽热，是跨越现实与理想边境的探险家。", traits: ["🦄 狂热激情", "🌈 跳跃创意", "📚 博学多才", "✨ 理想主义"], stats: [95, 40, 90, 85, 95, 98] },
-        "ESTJ": { name: "海顿", mbti: "ESTJ", good: "门德尔松", bad: "舒曼", desc: "秩序的组织者。在平衡与稳定中寻找乐趣，是值得所有人信赖的基石。", traits: ["🏗️ 秩序井然", "🎩 幽默稳重", "📈 高效产出", "🤝 值得信赖"], stats: [60, 95, 75, 90, 95, 85] },
-        "ESFJ": { name: "门德尔松", mbti: "ESFJ", desc: "优雅的协调者。追求平衡得体，将复杂关系处理得如旋律般顺滑。", traits: ["🦋 优雅得体", "🎪 社交核心", "🕊️ 追求和谐", "🍃 温润如玉"], stats: [85, 80, 80, 85, 95, 88], good: "柴可夫斯基", bad: "勋伯格" },
-        "ESTP": { name: "莫扎特", mbti: "ESTP", good: "李斯特", bad: "拉威尔", desc: "天生宠儿。规则对你而言是玩具，拥有举重若轻的直觉与透明天真。", traits: ["🎯 直觉惊人", "🎈 轻快灵动", "🌪️ 应变极强", "🎢 举重若轻"], stats: [80, 50, 98, 95, 90, 100] },
-        "ESFP": { name: "格里格", mbti: "ESFP", good: "维瓦尔第", bad: "贝多芬", desc: "生命舞者。热爱鲜活色彩与民族根脉，从烟火中提炼跳动的生命力。", traits: ["💃 感染力强", "🎨 色彩斑斓", "🐾 活泼灵动", "🔥 真挚热情"], stats: [90, 40, 85, 80, 95, 92] }
+        "INTJ": { 
+            name: "贝多芬", mbti: "INTJ", good: "莫扎特", bad: "格里格", 
+            desc: "你拥有极强的意志力。正如贝多芬，一位与命运抗争的巨人，内心充满炽热和理想主义。你擅长在逆境中通过严密的逻辑推演寻找出口，对世界有着近乎偏执的真诚与深度。", 
+            works: "🎹 《月光》奏鸣曲 · 🎻 《克鲁采》 · 🎼 《第九交响曲》",
+            traits: ["🏔️ 意志爆发", "🧠 逻辑缜密", "🦅 独立深邃", "🔭 远见卓识"], stats: [85, 95, 100, 92, 85, 95] 
+        },
+        "INTP": { 
+            name: "勋伯格", mbti: "INTP", good: "普罗科菲耶夫", bad: "门德尔松", 
+            desc: "你是绝对理性的探险家。你与勋伯格一样，敢于解构传统的‘调性’，在纯粹的数学美感中寻找秩序。比起情感的共鸣，你更在意系统逻辑的自洽。", 
+            works: "🌓 《月迷彼埃罗》 · 🎻 《升华之夜》 · 🎼 《五首管弦乐曲》",
+            traits: ["🧪 拆解重构", "📐 绝对理性", "🧱 客观严苛", "🌌 突破边界"], stats: [40, 98, 88, 95, 90, 100] 
+        },
+        "INFJ": { 
+            name: "拉威尔", mbti: "INFJ", good: "舒曼", bad: "莫扎特", 
+            desc: "你是追求极致的灵魂工匠。你与拉威尔有着相同的特质：在极度精准、考究的外壳下，包裹着一颗敏感、易碎且极其复杂的内心。", 
+            works: "💃 《大圆舞曲》 · 💧 《水之嬉戏》 · 🎹 《左手钢琴协奏曲》",
+            traits: ["💎 完美主义", "🧘 内敛克制", "🎨 细腻考究", "🕯️ 精神向导"], stats: [92, 85, 90, 95, 88, 92] 
+        },
+        "INFP": { 
+            name: "肖邦", mbti: "INFP", good: "柴可夫斯基", bad: "巴赫", 
+            desc: "你是灵魂的低语者。你和肖邦都拥有将私人忧郁转化为永恒美感的能力。你不需要宏大的叙事，因为你的内心世界本身就是一片深邃的汪洋。", 
+            works: "🌃 《夜曲集》 · 🎹 《第一叙事曲》 · 🎼 《革命练习曲》",
+            traits: ["🦢 极致纤细", "🥀 浪漫幻想", "🌙 孤独美学", "❤️ 真挚共鸣"], stats: [98, 30, 85, 90, 80, 90] 
+        },
+        "ISTJ": { 
+            name: "巴赫", mbti: "ISTJ", good: "勃拉姆斯", bad: "肖邦", 
+            desc: "你是宇宙秩序的翻译官。你与巴赫在‘规则’中找到了最大的自由。你相信逻辑、敬畏秩序，认为最严谨的结构才能通往最神圣的永恒。", 
+            works: "⛪ 《哥德堡变奏曲》 · 🎻 《无伴奏小提琴组曲》 · 🎼 《赋格的艺术》",
+            traits: ["🏛️ 规律严谨", "🔢 逻辑巅峰", "⚓ 专注可靠", "♾️ 永恒秩序"], stats: [30, 100, 95, 98, 90, 50] 
+        },
+        "ISFJ": { 
+            name: "勃拉姆斯", mbti: "ISFJ", good: "海顿", bad: "李斯特", 
+            desc: "你是传统的守望者。你与勃拉姆斯一样，在坚实、复古的形式下蕴含着最厚重的人文关怀。你内敛、可靠，甘于在漫长的打磨中积蓄深度。", 
+            works: "🎼 《第四交响曲》 · 🎹 《第一钢琴协奏曲》 · 🎻 《小提琴协奏曲》",
+            traits: ["🛡️ 稳重可靠", "🍷 内敛深情", "📜 敬畏传统", "⏳ 极致耐心"], stats: [85, 88, 70, 92, 85, 80] 
+        },
+        "ISTP": { 
+            name: "维瓦尔第", mbti: "ISTP", good: "格里格", bad: "柴可夫斯基", 
+            desc: "你是自然的捕捉者。你拥有惊人的专注力与实践力，像维瓦尔第那样，总能敏锐捕捉到生活中瞬息万变的灵感，并将其化作动感的现实。", 
+            works: "🍃 《四季》 · 🎻 《和谐的灵感》 · 🎼 《格劳利亚》",
+            traits: ["⚙️ 务实高效", "⚡ 瞬间爆发", "💻 技术宅力", "🍃 自然灵性"], stats: [70, 90, 85, 88, 90, 95] 
+        },
+        "ISFP": { 
+            name: "舒伯特", mbti: "ISFP", good: "莫扎特", bad: "贝多芬", 
+            desc: "你是纯粹的吟游诗人。你与舒伯特有着天生的共鸣：灵感如泉水般自然流淌。你活在当下，用直觉去体验生命中每一个动人的、甚至是忧郁的瞬间。", 
+            works: "🎻 《死神与少女》 · 🎼 《未完成交响曲》 · 🌲 《冬之旅》",
+            traits: ["🎨 纯真本能", "🎹 艺术灵感", "⛅ 活在当下", "🧚 不染尘埃"], stats: [92, 35, 80, 85, 82, 90] 
+        },
+        "ENTJ": { 
+            name: "李斯特", mbti: "ENTJ", good: "贝多芬", bad: "舒伯特", 
+            desc: "你是时代的引领者。你与李斯特一样，拥有横扫千军的气势。你擅长整合各种复杂的资源，将音乐、权力和影响力的边界打破，征服所有人。", 
+            works: "🎹 《b小调奏鸣曲》 · 🎼 《旅行岁月》 · 🌪️ 《超技练习曲》",
+            traits: ["👑 领袖气质", "⚡ 技巧巅峰", "🗺️ 掌控全局", "🚀 极具开创"], stats: [88, 90, 92, 95, 98, 95] 
+        },
+        "ENTP": { 
+            name: "普罗科菲耶夫", mbti: "ENTP", good: "勋伯格", bad: "勃拉姆斯", 
+            desc: "你是机敏的博弈者。你喜欢普罗科菲耶夫式的‘出其不意’，乐于在常规中加入一点讽刺和尖锐的创意。你从不畏惧挑战权威，甚至享受争议。", 
+            works: "⚔️ 《托卡塔》 · 🎼 《第三钢琴协奏曲》 · 🐺 《彼得与狼》",
+            traits: ["🎭 犀利幽默", "🔥 挑战传统", "🎲 灵活多变", "💡 智力驱动"], stats: [75, 85, 95, 88, 92, 100] 
+        },
+        "ENFJ": { 
+            name: "柴可夫斯基", mbti: "ENFJ", good: "舒曼", bad: "巴赫", 
+            desc: "你是情感的共振者。你和老柴一样，有着博大的爱与极致的真诚。你的内心世界有着极强的叙事感，每一次情感的爆发都能引起众人的流泪共鸣。", 
+            works: "🎻 《D大调小提琴协奏曲》 · 🎼 《第六“悲怆”交响曲》 · 🦢 《天鹅湖》",
+            traits: ["🔥 极致热忱", "🤝 同理心强", "🌟 极具魅力", "📢 情感领袖"], stats: [95, 50, 80, 90, 95, 92] 
+        },
+        "ENFP": { 
+            name: "舒曼", mbti: "ENFP", good: "拉威尔", bad: "海顿", 
+            desc: "你是永恒的追梦人。你与舒曼一样，活在一个由幻想和诗意编织的世界里。你的生命是一场跨越文学与音乐的冒险，炽热、跳跃且极富感染力。", 
+            works: "🦋 《蝴蝶》 · 🎼 《第一“春天”交响曲》 · 🎹 《C大调幻想曲》",
+            traits: ["🦄 狂热激情", "🌈 跳跃创意", "📚 博学多才", "✨ 理想主义"], stats: [95, 40, 90, 85, 95, 98] 
+        },
+        "ESTJ": { 
+            name: "海顿", mbti: "ESTJ", good: "门德尔松", bad: "舒曼", 
+            desc: "你是秩序的组织者。你与海顿一样，是稳定与和谐的基石。你用智慧维护着庞大系统的运转，同时又能在严肃的职业精神中融入恰到好处的幽默感。", 
+            works: "🎼 《惊愕交响曲》 · 🎻 《日出弦乐四重奏》 · 🎹 《天地创造》",
+            traits: ["🏗️ 秩序井然", "🎩 幽默稳重", "📈 高效产出", "🤝 值得信赖"], stats: [60, 95, 75, 90, 95, 85] 
+        },
+        "ESFJ": { 
+            name: "门德尔松", mbti: "ESFJ", good: "柴可夫斯基", bad: "勋伯格", 
+            desc: "你是优雅的协调者。你与门德尔松一样，拥有极高的社交天赋与审美情趣。你追求平衡与得体，致力于在复杂的社会和艺术关系中寻找最和谐的旋律。", 
+            works: "🎻 《e小调小提琴协奏曲》 · 🌲 《仲夏夜之梦》 · 🎹 《无词歌》",
+            traits: ["🦋 优雅得体", "🎪 社交核心", "🕊️ 追求和谐", "🍃 温润如玉"], stats: [85, 80, 80, 85, 95, 88] 
+        },
+        "ESTP": { 
+            name: "莫扎特", mbti: "ESTP", good: "李斯特", bad: "拉威尔", 
+            desc: "你是天生的宠儿。你拥有莫扎特般举重若轻的直觉。规则在你面前只是博弈的工具，你在复杂的逻辑博弈中依然保持着最透明的天真。", 
+            works: "🎼 《第四十一交响曲》 · 🎹 《第二十钢琴协奏曲》 · 🎭 《唐·璜》",
+            traits: ["🎯 直觉惊人", "🎈 轻快灵动", "🌪️ 应变极强", "🎢 举重若轻"], stats: [80, 50, 98, 95, 90, 100] 
+        },
+        "ESFP": { 
+            name: "格里格", mbti: "ESFP", good: "维瓦尔第", bad: "贝多芬", 
+            desc: "你是生命的舞者。你和格里格一样，热爱土地和最鲜活的生命力。你总能从烟火气息中捕捉到跳动的节奏，用最热情的姿态去感染身边的每一个人。", 
+            works: "🏞️ 《第二小提琴奏鸣曲》 · 🎼 《a小调钢琴协奏曲》 · 🎹 《抒情小品集》",
+            traits: ["💃 感染力强", "🎨 色彩斑斓", "🐾 活泼灵动", "🔥 真挚热情"], stats: [90, 40, 85, 80, 95, 92] 
+        }
     };
 
     const qs = [
@@ -169,7 +258,7 @@
         { q: "你喜欢挑战现有的规则，尝试更具创意的解决办法。", t: "P" },
         { q: "阅读一本深奥的书或聆听复杂的复调音乐是你理想的放松方式。", t: "I" },
         { q: "你并不反感成为众人的焦点，甚至乐于展现自己的才华。", t: "E" },
-        { q: "你对数字、模式和客观规律有一种天然的亲近感。", t: "T" },
+        { q: "你对数字、模式 and 客观规律有一种天然的亲近感。", t: "T" },
         { q: "在面临选择时，你首先考虑的是：‘这是否符合我的核心价值观？’", t: "F" },
         { q: "你更习惯先完成手头的工作，再去尝试新的任务。", t: "J" },
         { q: "你的脑海中经常会有跳跃式的创意，有时甚至让自己停不下来。", t: "N" }
@@ -206,8 +295,9 @@
         document.getElementById('res-mbti').innerText = p.mbti;
         document.getElementById('res-name').innerText = p.name;
         document.getElementById('res-desc').innerText = p.desc;
-        document.getElementById('rel-good').innerText = p.good || "莫扎特";
-        document.getElementById('rel-bad').innerText = p.bad || "拉威尔";
+        document.getElementById('res-works').innerText = p.works;
+        document.getElementById('rel-good').innerText = p.good;
+        document.getElementById('rel-bad').innerText = p.bad;
         document.getElementById('trait-grid').innerHTML = p.traits.map(t => `<div class="trait-card"><b>${t.split(' ')[0]}</b><span>${t.split(' ')[1]}</span></div>`).join('');
         
         new Chart(document.getElementById('myChart').getContext('2d'), {
@@ -226,7 +316,7 @@
             options: {
                 scale: {
                     ticks: { beginAtZero: true, max: 100, display: false },
-                    pointLabels: { fontSize: 13, fontStyle: 'bold', fontColor: '#2d3436' }
+                    pointLabels: { fontSize: 12, fontStyle: 'bold', fontColor: '#2d3436' }
                 },
                 legend: { display: false }
             }
