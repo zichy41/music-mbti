@@ -3,162 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>声命镜像 - 古典灵魂全记录</title>
-    <script src="https://cdn.bootcdn.net/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <title>声命镜像 - 古典灵魂测试</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+
     <style>
         :root {
             --p: #6c5ce7;
-            --p-deep: #4834d4;
-            --bg: #f0f2f7;
-            --card: #ffffff;
-            --txt: #2d3436;
-            --sub: #636e72;
+            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --serif: "Georgia", "Times New Roman", "Songti SC", "SimSun", serif;
+            --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
         body { 
-            margin: 0; background: var(--bg); font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-            display: flex; justify-content: center; min-height: 100vh; color: var(--txt);
+            margin: 0; background: var(--bg-gradient); font-family: var(--sans);
+            display: flex; justify-content: center; min-height: 100vh; color: #2d3436;
         }
 
         #app { 
-            width: 100%; max-width: 450px; background: var(--card); min-height: 100vh; 
-            display: flex; flex-direction: column; box-shadow: 0 0 40px rgba(0,0,0,0.1);
+            width: 100%; max-width: 450px; background: rgba(255, 255, 255, 0.95); 
+            min-height: 100vh; display: flex; flex-direction: column; 
+            box-shadow: 0 0 40px rgba(0,0,0,0.1); position: relative;
+            backdrop-filter: blur(10px);
         }
 
-        .screen { padding: 40px 25px; flex: 1; display: flex; flex-direction: column; animation: fadeIn 0.6s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .screen { padding: 40px 30px; flex: 1; display: flex; flex-direction: column; animation: fadeIn 0.8s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .hidden { display: none !important; }
 
-        /* 首页增强 */
-        .hero { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        .hero-icon { 
-            font-size: 70px; margin-bottom: 20px; width: 140px; height: 140px; 
-            background: linear-gradient(135deg, var(--p), #a29bfe);
-            border-radius: 40px; display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 15px 35px rgba(108, 92, 231, 0.3);
+        /* --- 首页美化 --- */
+        .hero-title { 
+            font-family: var(--serif); font-size: 3.5rem; margin: 10px 0; 
+            background: linear-gradient(45deg, #2d3436, #6c5ce7);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-        .title { font-size: 2.8rem; font-weight: 900; margin: 0; background: linear-gradient(to right, #2d3436, var(--p)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        /* 进度条 */
-        .prog-w { width: 100%; height: 6px; background: #eee; border-radius: 10px; margin-bottom: 35px; }
-        .prog-b { height: 100%; background: var(--p); width: 0%; border-radius: 10px; transition: 0.4s; }
+        /* --- 按钮 --- */
+        .btn-main { 
+            background: #2d3436; color: white; border: none; padding: 22px; border-radius: 50px; 
+            font-weight: bold; width: 100%; font-size: 1.1rem; cursor: pointer; 
+            letter-spacing: 2px; transition: 0.3s; margin-top: auto;
+        }
 
-        /* 问卷圆圈 */
-        .scale { display: flex; justify-content: space-between; align-items: center; margin: 45px 0; }
-        .dot { border: 3px solid; border-radius: 50%; cursor: pointer; transition: 0.2s; }
-        .s3 { width: 54px; height: 54px; } .s2 { width: 44px; height: 44px; } .s1 { width: 34px; height: 34px; }
+        /* --- 问卷 --- */
+        .prog-container { width: 100%; height: 4px; background: #eee; margin-bottom: 50px; }
+        .prog-bar { height: 100%; background: var(--p); width: 0%; transition: 0.4s; }
+        .q-text { font-size: 1.6rem; font-family: var(--serif); line-height: 1.4; height: 160px; }
+
+        .scale-box { display: flex; justify-content: space-between; align-items: center; margin: 40px 0; }
+        .dot { border: 2.5px solid; border-radius: 50%; cursor: pointer; transition: 0.2s; }
+        .s3 { width: 56px; height: 56px; } .s1 { width: 34px; height: 34px; }
         .agree { border-color: #00b894; } .disagree { border-color: #ff7675; }
 
-        /* 结果页 */
-        .res-name { font-size: 3.2rem; font-weight: 900; margin: 10px 0; color: var(--p); text-align: center; }
-        .chart-box { padding: 15px; background: #fff; border-radius: 25px; margin: 20px 0; border: 1px solid #f0f0f5; }
-        .res-card { 
-            background: #f9f9fb; border-radius: 20px; padding: 22px; line-height: 1.8; 
-            margin-bottom: 25px; border-left: 6px solid var(--p); font-size: 1.05rem;
-        }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .item { 
-            background: #fff; border: 1px solid #eee; padding: 15px; border-radius: 18px; 
-            text-align: center; font-size: 0.95rem; font-weight: 700; display: flex; flex-direction: column; gap: 5px;
-        }
+        /* --- 结果页字体强化 --- */
+        .res-mbti { font-family: var(--serif); font-style: italic; color: var(--p); font-size: 1.2rem; letter-spacing: 5px; }
+        .res-name { font-family: var(--serif); font-size: 3.2rem; font-weight: normal; margin: 5px 0 20px 0; }
+        .res-desc { font-family: var(--serif); line-height: 1.8; font-size: 1.1rem; color: #444; background: #f9f9f9; padding: 20px; border-radius: 15px; }
+        
+        .trait-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .trait-item { background: white; border: 1px solid #eee; padding: 15px; border-radius: 12px; text-align: center; }
+        .trait-item b { display: block; font-family: var(--serif); margin-top: 5px; }
 
-        .btn { 
-            background: var(--txt); color: white; border: none; padding: 20px; border-radius: 20px; 
-            font-weight: 800; width: 100%; font-size: 1.1rem; cursor: pointer; 
-        }
+        #chart-container { position: relative; height: 280px; width: 100%; margin: 20px 0; }
     </style>
 </head>
 <body>
+
 <div id="app">
     <section id="landing" class="screen">
-        <div class="hero">
-            <div class="hero-icon">🎹</div>
-            <h1 class="title">声命镜像</h1>
-            <p style="color: var(--sub); margin-top: 10px;">Classical Soul Analysis</p>
+        <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+            <div style="font-size: 4rem;">🎧</div>
+            <h1 class="hero-title">声命镜像</h1>
+            <p style="color: #636e72; font-family: var(--serif); font-style: italic;">Musical Soul Reflection</p>
         </div>
-        <button class="btn" onclick="start()">开始灵魂调律</button>
+        <button class="btn-main" onclick="start()">START TEST</button>
     </section>
 
     <section id="quiz" class="screen hidden">
-        <div class="prog-w"><div class="prog-b" id="p-bar"></div></div>
-        <div style="height: 140px;">
-            <p id="q-step" style="color:var(--p); font-weight:bold;"></p>
-            <h2 id="q-text" style="font-size: 1.5rem; line-height: 1.4;">正在启动...</h2>
-        </div>
-        <div class="scale">
+        <div class="prog-container"><div class="prog-bar" id="p-bar"></div></div>
+        <div class="q-text" id="q-text">正在共鸣...</div>
+        <div class="scale-box">
             <div class="dot agree s3" onclick="next(3)"></div>
-            <div class="dot agree s2" onclick="next(2)"></div>
             <div class="dot agree s1" onclick="next(1)"></div>
             <div class="dot disagree s1" onclick="next(-1)"></div>
-            <div class="dot disagree s2" onclick="next(-2)"></div>
             <div class="dot disagree s3" onclick="next(-3)"></div>
         </div>
-        <div style="display:flex; justify-content:space-between; font-weight:800; color:var(--sub);">
-            <span>同意</span><span>反对</span>
+        <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:0.8rem; color:#b2bec3;">
+            <span>AGREE</span><span>DISAGREE</span>
         </div>
     </section>
 
     <section id="result" class="screen hidden">
         <div style="text-align:center;">
-            <span id="res-mbti" style="letter-spacing:3px; color:var(--sub); font-weight:bold;"></span>
-            <h1 id="res-name" class="res-name"></h1>
+            <div id="res-mbti" class="res-mbti">INTJ</div>
+            <h1 id="res-name" class="res-name">贝多芬</h1>
         </div>
+
+        <div id="chart-container">
+            <canvas id="myChart"></canvas>
+        </div>
+
+        <div id="res-desc" class="res-desc"></div>
+
+        <div class="trait-grid" id="res-grid"></div>
         
-        <div class="chart-box">
-            <canvas id="radarChart" width="400" height="350"></canvas>
-        </div>
-
-        <div class="res-card">
-            <p id="res-desc" style="margin:0;"></p>
-        </div>
-
-        <div class="grid" id="res-grid"></div>
-        <button class="btn" style="margin-top:30px; background:var(--p);" onclick="location.reload()">重新测试</button>
+        <p style="text-align:center; margin-top:40px; color:#b2bec3; cursor:pointer; font-size:0.8rem;" onclick="location.reload()">REPLAY</p>
     </section>
 </div>
 
 <script>
     const db = {
-        "INTJ": { name: "贝多芬", desc: "你是绝对的意志主宰。在耳聋的沉寂中，你依然能构建出宇宙最宏伟的交响秩序。你天生对肤浅的装饰免疫，追求的是穿越时代的精神内核。你用坚韧的逻辑将痛苦锻造成力量，在孤独中与星空对话。", traits: [{e:"🏔️", t:"意志爆发"}, {e:"📐", t:"秩序重构"}, {e:"🦅", t:"独立深邃"}, {e:"🔭", t:"远见卓识"}], stats: [80, 95, 100, 95, 80, 98] },
-        "INTP": { name: "勋伯格", desc: "你是智性的反叛者。敢于拆解传承三百年的调性体系，建立十二音序列的严密逻辑。比起悦耳，你更在乎真理的纯粹。你不仅是作曲家，更像是一位在音符实验室里拆解世界的数学家。", traits: [{e:"🧬", t:"拆解重组"}, {e:"🧪", t:"绝对理性"}, {e:"🧊", t:"客观严苛"}, {e:"🌌", t:"逻辑至上"}], stats: [35, 98, 90, 100, 85, 95] },
-        "INFJ": { name: "拉威尔", desc: "你是完美的灵魂工匠。你的情感被包裹在最严苛、最精致的仪式感之下。每一丝情绪的波动都经过精确的配器计算，如同一座闪耀的钟表。你拥有看穿伪善的直觉，在优雅中守护着内心的圣地。", traits: [{e:"💎", t:"完美主义"}, {e:"🕯️", t:"直觉洞察"}, {e:"🎨", t:"极致配器"}, {e:"🕰️", t:"精密仪式"}], stats: [90, 85, 92, 95, 88, 92] },
-        "INFP": { name: "肖邦", desc: "你是灵魂的低语者。你是那种能从一片落叶中读出整个秋天忧郁的天才。你拒绝宏大叙事，只愿在黑白琴键的私密角落里，绽放最极致、最易碎的浪漫。你的力量来自于对他人的深度共鸣。", traits: [{e:"🦢", t:"极致纤细"}, {e:"🥀", t:"忧郁浪漫"}, {e:"🌙", t:"孤独美学"}, {e:"💞", t:"情感共振"}], stats: [100, 30, 85, 80, 75, 90] },
-        "ENTJ": { name: "李斯特", desc: "你是舞台的征服者。不仅拥有炫目的技巧，更有掌控时代的远见。你成功地将古典乐带向大众，开启了巨星时代。你天生擅长整合资源与情感，用宏大的叙事和极具开创性的手段统领全局。", traits: [{e:"👑", t:"领袖魅力"}, {e:"⚡", t:"技巧巅峰"}, {e:"🗺️", t:"掌控全局"}, {e:"💥", t:"开创先驱"}], stats: [88, 90, 95, 95, 98, 95] },
-        "ENTP": { name: "普罗科菲耶夫", desc: "你是机敏的博弈者。你喜欢在旋律中加入一点‘辛辣’的讽刺和不协和音，以此挑战平庸。你思维跳跃，拒绝被任何教条束缚，在不断的创新和智力挑战中获得最大的满足感。", traits: [{e:"🎭", t:"犀利幽默"}, {e:"🔥", t:"颠覆传统"}, {e:"🎲", t:"思维跳跃"}, {e:"💡", t:"智力狂热"}], stats: [70, 85, 98, 90, 92, 100] },
-        "ENFJ": { name: "柴可夫斯基", desc: "你是情感的布道者。你从不掩饰内心的波澜，将博大的爱与无法逃避的宿命感倾注在每一个音符里。你拥有极强的感染力，能够瞬间拉近所有人的心，成为众人情感的引路人。", traits: [{e:"❤️", t:"博大之爱"}, {e:"🔥", t:"情感爆发"}, {e:"🌟", t:"极具感染"}, {e:"🤝", t:"精神领袖"}], stats: [98, 55, 85, 88, 95, 92] },
-        "ENFP": { name: "舒曼", desc: "你是永恒的追梦人。你的世界里住着两个灵魂：一个狂热如火，一个温柔如诗。你的一生都在跨越现实与理想的边界，用无穷的想象力对抗平庸的生活。你是永远的孩子，也是最博学的创作者。", traits: [{e:"🦄", t:"奇幻想象"}, {e:"🌈", t:"跳跃创意"}, {e:"📚", t:"博学才情"}, {e:"✨", t:"理想主义"}], stats: [95, 40, 95, 85, 95, 98] },
-        "ISTJ": { name: "巴赫", desc: "你是宇宙神圣秩序的维护者。在复调的错综交互中，你触碰到了数学与神性的统一。你极其克制、专注且可靠，认为规则是通向自由的唯一路径，在平凡的生活中产出了如星系般庞大且严密的艺术。", traits: [{e:"🏛️", t:"严丝合缝"}, {e:"🔢", t:"逻辑之巅"}, {e:"⚓", t:"极致专注"}, {e:"♾️", t:"永恒秩序"}], stats: [30, 100, 95, 98, 90, 50] },
-        "ISFJ": { name: "勃拉姆斯", desc: "你是传统的守望者。你的深情被包裹在厚重的古典外壳之下，内敛而克制。你宁愿耗费二十年去磨砺一部交响曲，也不愿交出半点不完美的草稿。你是所有人最坚实的后盾，守候着艺术最后的宁静。", traits: [{e:"🛡️", t:"沉稳可靠"}, {e:"🍷", t:"内敛深情"}, {e:"📜", t:"致敬传统"}, {e:"⏳", t:"极致耐心"}], stats: [85, 88, 75, 92, 85, 80] },
-        "ESTJ": { name: "海顿", desc: "你是高效的组织天才。你是‘交响乐之父’，更是那种能让上百人的乐团有条不紊运作的管理者。你懂得在严密的社会结构中运用幽默感，是秩序的维护者，也是最值得信赖的基石。", traits: [{e:"🏗️", t:"秩序井然"}, {e:"🎩", t:"稳健幽默"}, {e:"📊", t:"高效产出"}, {e:"🤝", t:"值得信赖"}], stats: [65, 95, 80, 92, 95, 88] },
-        "ESFJ": { name: "门德尔松", desc: "你是优雅的社交核心。你的人生如旋律般顺滑，追求极致的平衡与得体。你擅长协调各方，在繁复的社会关系中通过卓越的修养与才华赢得所有人的尊重，是人间烟火里的一抹清凉。", traits: [{e:"🦋", t:"优雅得体"}, {e:"🏰", t:"社交精英"}, {e:"🕊️", t:"平衡之美"}, {e:"🍃", t:"温润如玉"}], stats: [88, 80, 85, 88, 95, 90] },
-        "ISTP": { name: "维瓦尔第", desc: "你是自然的极速捕捉者。你拥有惊人的瞬间爆发力和对万物生灵的观察力。比起深刻的思辨，你更倾向于用精湛的技巧去描绘自然的律动，像一位技艺高超的匠人，将瞬间定格为永恒。", traits: [{e:"🏎️", t:"瞬间爆发"}, {e:"⚙️", t:"匠人精神"}, {e:"🌿", t:"自然灵性"}, {e:"🛠️", t:"务实高效"}], stats: [75, 90, 88, 90, 92, 95] },
-        "ISFP": { name: "舒伯特", desc: "你是纯粹的艺术吟游者。你的创作不带任何刻意的经营，灵感如同清泉自然喷涌。你活在感官与旋律的当下，用最朴素的情感去对抗世间的寒冷。你是人间最纯真的一抹亮色，不染尘埃。", traits: [{e:"🧚", t:"纯真本能"}, {e:"🥧", t:"艺术灵感"}, {e:"🌤️", t:"活在当下"}, {e:"💐", t:"不染尘埃"}], stats: [95, 35, 85, 85, 82, 90] },
-        "ESTP": { name: "莫扎特", desc: "你是上帝派来的‘顽童’。规则对你来说只是用来打破的玩具。你拥有举重若轻的直觉，再复杂的乐章在你笔下也如同呼吸般自然。你讨厌枯燥的理论，永远在追逐新鲜、刺激与纯粹的快乐。", traits: [{e:"🎯", t:"神之直觉"}, {e:"🎈", t:"轻快灵动"}, {e:"🌪️", t:"应变极强"}, {e:"🎡", t:"举重若轻"}], stats: [82, 55, 100, 95, 90, 100] },
-        "ESFP": { name: "格里格", desc: "你是民族生命的舞者。你热爱脚下的土地与鲜活的人民，总能从日常的民间舞蹈和山川中提炼出跳跃的生命力。你拥有一种天生的感染力，能让每一个枯燥的瞬间都充满热烈的情绪。", traits: [{e:"💃", t:"感染力强"}, {e:"🏘️", t:"民族根脉"}, {e:"🐾", t:"活泼灵动"}, {e:"🔥", t:"真挚热情"}], stats: [92, 45, 88, 85, 95, 92] }
+        "INTJ": { name: "Beethoven", mbti: "INTJ", desc: "你是伟大的构建者。擅长在混沌中建立宏伟秩序，用坚韧意志对抗命运。你不屑于表面的装饰，更倾向于在严谨的结构中爆发惊人的生命力量。", traits: ["🏔️ 意志爆发", "🧠 逻辑缜密", "🦅 独立深邃", "🔭 远见卓识"], stats: [80, 95, 100, 90, 85, 95] },
+        "INFP": { name: "Chopin", mbti: "INFP", desc: "你是灵魂的低语者。用纤细的旋律承载最深沉的忧郁，在孤独中绽放灵魂之火。你不需要宏大的叙事，一朵花的凋零也能让你写出不朽的乐章。", traits: ["🦢 极致纤细", "🥀 浪漫幻想", "🌙 孤独美学", "❤️ 真挚共鸣"], stats: [98, 30, 85, 90, 80, 90] },
+        "INFJ": { name: "Ravel", mbti: "INFJ", desc: "你是完美的灵魂工匠。将炽热的情感浓缩在最严苛的框架下，每一丝情绪都经过精确计算。你拥有看透人心的直觉，追求极致的艺术境界。", traits: ["💎 完美主义", "🧘 内敛克制", "🎨 极致细腻", "🕯️ 精神向导"], stats: [92, 85, 90, 95, 88, 92] },
+        "ISTJ": { name: "J.S. Bach", mbti: "ISTJ", desc: "你是宇宙秩序的翻译官。在最严密的复调逻辑中触碰神圣的永恒。规则对你而言不是束缚，而是通往宇宙真理的唯一路径。", traits: ["🏛️ 规律严谨", "🔢 逻辑巅峰", "⚓ 专注可靠", "♾️ 永恒秩序"], stats: [30, 100, 95, 98, 90, 50] },
+        "ENTP": { name: "Prokofiev", mbti: "ENTP", desc: "你是机敏的博弈者。乐于挑战常规，用出其不意的逻辑和尖锐的节奏给世界带来惊喜。你不畏惧争议，甚至享受挑战传统的快感。", traits: ["🎭 犀利幽默", "🔥 挑战传统", "🎲 灵活多变", "💡 智力驱动"], stats: [75, 85, 95, 88, 92, 100] },
+        "ESTP": { name: "Mozart", mbti: "ESTP", desc: "你是天生的宠儿。规则对你而言是玩具，拥有举重若轻的直觉。你在极其复杂的博弈中保持透明的天真，是永恒的少年。", traits: ["🎯 直觉惊人", "🎈 轻快灵动", "🌪️ 应变极强", "🎢 举重若轻"], stats: [80, 50, 98, 95, 90, 100] },
+        "ENFP": { name: "Schumann", mbti: "ENFP", desc: "你是永恒的追梦人。你的世界充满幻想与炽热，你是跨越现实与理想边境的探险家。你的生命是一场永不谢幕的浪漫冒险。", traits: ["🦄 狂热激情", "🌈 跳跃创意", "📚 博学多才", "✨ 理想主义"], stats: [95, 40, 90, 85, 95, 98] },
+        "ENTJ": { name: "Liszt", mbti: "ENTJ", desc: "你是时代的引领者。拥有卓越技巧与宏大远见，天生属于舞台的中心。你擅长整合资源与情感，将音乐化作征服世界的权杖。", traits: ["👑 领袖气质", "⚡ 技巧巅峰", "🗺️ 掌控全局", "🚀 极具开创"], stats: [88, 90, 92, 95, 98, 95] },
+        "INTP": { name: "Schoenberg", mbti: "INTP", desc: "你是理性的探险家。敢于拆解传承百年的规则，构建属于未来的逻辑体系。你对真理的追求远超感性的共鸣，是打破旧世界的先驱。", traits: ["🧪 拆解重构", "📐 绝对理性", "🧱 客观严苛", "🌌 突破边界"], stats: [40, 98, 88, 95, 90, 100] },
+        "ISFJ": { name: "Brahms", mbti: "ISFJ", desc: "你是传统的守望者。在古典形式中包裹着最厚重的人文关怀，内敛且坚定。你甘于在寂寞中打磨作品，追求经得起时间考验的深度。", traits: ["🛡️ 稳重可靠", "🍷 内敛深情", "📜 敬畏传统", "⏳ 极致耐心"], stats: [85, 88, 70, 92, 85, 80] },
+        "ESTJ": { name: "Haydn", mbti: "ESTJ", desc: "你是秩序的组织者。在平衡与稳定中寻找乐趣，是值得所有人信赖的基石。你用幽默和智慧维系着世界的和谐运作。", traits: ["🏗️ 秩序井然", "🎩 幽默稳重", "📈 高效产出", "🤝 值得信赖"], stats: [60, 95, 75, 90, 95, 85] },
+        "ESFJ": { name: "Mendelssohn", mbti: "ESFJ", desc: "你是优雅的协调者。追求极致的平衡与得体，将复杂的关系处理得如旋律般顺滑。你走到哪里，哪里就充满了和谐的乐声。", traits: ["🦋 优雅得体", "🎪 社交核心", "🕊️ 追求和谐", "🍃 温润如玉"], stats: [85, 80, 80, 85, 95, 88] },
+        "ISTP": { name: "Vivaldi", mbti: "ISTP", desc: "你是自然的捕捉者。拥有惊人的专注力与实践力，擅长捕捉四季瞬时的灵感。你不仅是艺术家，更是深谙技术与自然的巧匠。", traits: ["⚙️ 务实高效", "⚡ 瞬间爆发", "💻 技术宅力", "🍃 自然灵性"], stats: [70, 90, 85, 88, 90, 95] },
+        "ISFP": { name: "Schubert", mbti: "ISFP", desc: "你是纯粹的吟游诗人。灵感如同泉水自然涌现，不带半分匠气。你活在当下，用音乐描绘生命中每一个动人的瞬间。", traits: ["🎨 纯真本能", "🎹 艺术灵感", "⛅ 活在当下", "🧚 不染尘埃"], stats: [92, 35, 80, 85, 82, 90] },
+        "ENFJ": { name: "Tchaikovsky", mbti: "ENFJ", desc: "你是情感的共振者。你的真挚能击中人心最柔软的地方，温暖且富有力量。你活在人与人的连接中，将博大的爱倾注于每一个音符。", traits: ["🔥 极致热忱", "🤝 同理心强", "🌟 极具魅力", "📢 情感领袖"], stats: [95, 50, 80, 90, 95, 92] },
+        "ESFP": { name: "Grieg", mbti: "ESFP", desc: "你是生命的舞者。热爱鲜活的色彩与民族根脉，总能从日常烟火中提炼出跳动的生命力，让周围的一切都欢快起来。", traits: ["💃 感染力强", "🎨 色彩斑斓", "🐾 活泼灵动", "🔥 真挚热情"], stats: [90, 40, 85, 80, 95, 92] }
     };
 
     const qs = [
-        { q: "面对人生危机，你更倾向于依靠不可撼动的意志力硬扛，而非寻找情感安慰。", t: "I" },
-        { q: "当你进入一个新的社交场合，你通常是那个能瞬间察觉气氛并调动大家的人。", t: "E" },
-        { q: "比起当下的具体细节，你更容易被事物的核心逻辑或未来的宏观蓝图所吸引。", t: "N" },
-        { q: "你无法忍受计划被临时打乱，秩序感是你安全感的最大来源。", t: "J" },
-        { q: "在决策时，你往往会优先考虑：‘这是否违背了我内心的真实感受或价值观？’", t: "F" },
-        { q: "你热衷于拆解复杂系统（如电子设备、理论体系），看清它内部的运作规律。", t: "T" },
-        { q: "你经常被形容为一个‘脚踏实地’的人，更信任数据和经验而非灵光一现。", t: "S" },
-        { q: "你享受即兴而为的快乐，认为生活不应该有太多的说明书。", t: "P" },
-        { q: "你天生拥有一种预判力，仿佛能提前察觉到某种尚未发生的危机或机遇。", t: "N" },
-        { q: "哪怕是在最疲惫的时候，面对别人的情感求助，你也很难冷面拒绝。", t: "F" },
-        { q: "你对规则保持天然的敬畏，认为传统是经过时间检验的智慧。", t: "S" },
-        { q: "你喜欢通过辩论或智力博弈来理清思路，即便这可能让场面有点紧张。", t: "T" },
-        { q: "比起宏大的目标，你更享受在当下的感官体验（如美餐、风景、节奏）中沉浸。", t: "S" },
-        { q: "你更偏好在安静、独立的空间里进行深度创作或思考，社交会消耗你的能量。", t: "I" },
-        { q: "你经常被视为一个脑洞大开的人，脑海中总是有跳跃的、不切实际的创意。", t: "N" },
-        { q: "如果有一项任务没有明确的截止日期和流程，你会感到非常焦虑。", t: "J" },
-        { q: "你享受成为焦点时的那种掌控感，观众的瞩目会让你充满力量。", t: "E" },
-        { q: "在处理冲突时，你总是能保持极致的客观，认为情感纠纷只会干扰事实判断。", t: "T" },
-        { q: "你倾向于在最后期限快到时爆发创意，过早的计划反而会限制你的发挥。", t: "P" },
-        { q: "你对‘优雅’和‘体面’有极高的要求，认为这是一个人修养的基础。", t: "S" }
+        { q: "You prefer spending time alone with your thoughts rather than in a busy social setting.", t: "I" },
+        { q: "You rely more on objective logic than your gut feelings when making big decisions.", t: "T" },
+        { q: "You are often excited by abstract ideas and future possibilities.", t: "N" },
+        { q: "You feel most comfortable when your day is planned and organized.", t: "J" },
+        { q: "You are deeply moved by emotional stories or beautiful pieces of art.", t: "F" },
+        { q: "You feel energized after interacting with a large group of people.", t: "E" },
+        { q: "You trust facts and concrete evidence more than creative inspiration.", t: "S" },
+        { q: "You prefer to keep your options open rather than committing to a strict plan.", t: "P" },
+        { q: "In an argument, you prioritize truth and logic over how others might feel.", t: "T" },
+        { q: "You often have a 'vision' for how things will play out in the long run.", t: "N" },
+        { q: "You consider yourself a practical person who focuses on what works right now.", t: "S" },
+        { q: "Maintaining harmony in a group is more important to you than being 'right'.", t: "F" },
+        { q: "Your workspace is usually very tidy and orderly.", t: "J" },
+        { q: "You enjoy breaking rules if you think there's a better, more creative way.", t: "P" },
+        { q: "Reading a deep book or listening to complex music is your ideal way to relax.", t: "I" },
+        { q: "You enjoy being the center of attention in a room.", t: "E" },
+        { q: "You have a natural affinity for numbers, patterns, and objective laws.", t: "T" },
+        { q: "You make choices based on your personal values rather than cool efficiency.", t: "F" },
+        { q: "You prefer to finish one task before starting another.", t: "J" },
+        { q: "Your mind is constantly jumping from one creative idea to another.", t: "N" }
     ];
 
     let step = 0;
@@ -171,7 +166,6 @@
     }
 
     function render() {
-        document.getElementById('q-step').innerText = `STEP ${step + 1} / ${qs.length}`;
         document.getElementById('q-text').innerText = qs[step].q;
         document.getElementById('p-bar').style.width = `${((step+1)/qs.length)*100}%`;
     }
@@ -187,49 +181,36 @@
     function show() {
         document.getElementById('quiz').classList.add('hidden');
         document.getElementById('result').classList.remove('hidden');
+        
         const m = (sc.E>=sc.I?'E':'I')+(sc.S>=sc.N?'S':'N')+(sc.T>=sc.F?'T':'F')+(sc.J>=sc.P?'J':'P');
         const p = db[m] || db["INTJ"];
         
-        document.getElementById('res-mbti').innerText = m;
+        document.getElementById('res-mbti').innerText = p.mbti;
         document.getElementById('res-name').innerText = p.name;
         document.getElementById('res-desc').innerText = p.desc;
-        document.getElementById('res-grid').innerHTML = p.traits.map(t => `
-            <div class="item">
-                <span style="font-size:1.6rem">${t.e}</span>
-                <span>${t.t}</span>
-            </div>
-        `).join('');
-
-        // 核心修复：确保图表在屏幕显示后渲染
+        document.getElementById('res-grid').innerHTML = p.traits.map(t => `<div class="trait-item"><b>${t}</b></div>`).join('');
+        
+        // 关键修复：确保在库加载后延迟一点点绘图
         setTimeout(() => {
-            const ctx = document.getElementById('radarChart');
-            if (window.myChart) window.myChart.destroy();
-            window.myChart = new Chart(ctx, {
+            const ctx = document.getElementById('myChart').getContext('2d');
+            new Chart(ctx, {
                 type: 'radar',
                 data: {
-                    labels: ['感性力', '逻辑力', '开创性', '掌控力', '感染力', '意志力'],
+                    labels: ['Passion', 'Logic', 'Creation', 'Structure', 'Impact', 'Stability'],
                     datasets: [{ 
                         data: p.stats, 
-                        backgroundColor: 'rgba(108, 92, 231, 0.25)', 
+                        backgroundColor: 'rgba(108, 92, 231, 0.2)', 
                         borderColor: '#6c5ce7', 
-                        borderWidth: 3,
-                        pointBackgroundColor: '#fff',
-                        pointBorderWidth: 2,
-                        pointRadius: 4
+                        borderWidth: 2,
+                        pointRadius: 4,
+                        pointBackgroundColor: '#6c5ce7'
                     }]
                 },
                 options: { 
                     responsive: true,
                     maintainAspectRatio: false,
-                    scales: { 
-                        r: { 
-                            min: 0, max: 100, 
-                            ticks: { display: false, stepSize: 20 }, 
-                            grid: { color: 'rgba(0,0,0,0.06)' },
-                            pointLabels: { font: { size: 13, weight: 'bold' }, color: '#636e72' }
-                        } 
-                    }, 
-                    plugins: { legend: { display: false } }
+                    scales: { r: { min:0, max:100, ticks:{display:false}, pointLabels:{ font:{size:11, family:'Georgia'} } } },
+                    plugins:{ legend:{display:false} } 
                 }
             });
         }, 100);
