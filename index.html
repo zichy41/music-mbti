@@ -16,22 +16,32 @@
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; -webkit-font-smoothing: antialiased; }
         
-        body { 
+ body { 
             margin: 0; 
-            
+            /* 核心流光背景 */
             background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
             display: flex; justify-content: center; min-height: 100vh;
+            /* 确保音符不会溢出 */
+            overflow: hidden; 
         }
+<div class="music-notes">
+        <div class="note note1">🎵</div>
+        <div class="note note2">🎶</div>
+        <div class="note note3">🎼</div>
+        <div class="note note4">🎵</div>
+        <div class="note note5">♩</div>
+        <div class="note note6">♪</div>
+        <div class="note note7">♫</div>
+    </div>
+        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
         #app { 
             width: 100%; max-width: 450px; 
-         
+            /* 保持你完美的五线谱水印背景 */
             background: 
-            
                 linear-gradient(rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.94)),
-          
                 repeating-linear-gradient(
                     transparent, 
                     transparent 100px, 
@@ -50,12 +60,48 @@
                     rgba(108, 92, 231, 0.05) 120px, 
                     rgba(108, 92, 231, 0.05) 121px
                 );
-            background-size: 100% 100%, 100% 160px; /* 控制五线谱的循环间隔 */
+            background-size: 100% 100%, 100% 160px;
             
             min-height: 100vh; display: flex; flex-direction: column; 
             box-shadow: 0 10px 50px rgba(0,0,0,0.2); 
             position: relative;
             backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            z-index: 10; /* 确保内容在音符上方 */
+        }
+
+        /* --- 新增：音符飘浮样式 --- */
+        .music-notes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* 确保音符不会阻挡点击 */
+            z-index: 1; /* 位于流光背景和#app容器之间 */
+        }
+
+        .note {
+            position: absolute;
+            font-size: 24px;
+            color: rgba(108, 92, 231, 0.1); /* 非常淡的紫色音符 */
+            animation: floatNotes 20s linear infinite;
+            opacity: 0;
+        }
+
+        /* 为不同的音符设置不同的起始位置、大小和动画延迟，模拟随机感 */
+        .note1 { left: 10%; top: 80%; font-size: 30px; animation-delay: 0s; }
+        .note2 { left: 20%; top: 70%; font-size: 20px; animation-delay: 2s; }
+        .note3 { left: 35%; top: 90%; font-size: 25px; animation-delay: 4s; }
+        .note4 { left: 50%; top: 75%; font-size: 18px; animation-delay: 6s; }
+        .note5 { left: 65%; top: 85%; font-size: 22px; animation-delay: 8s; }
+        .note6 { left: 80%; top: 70%; font-size: 28px; animation-delay: 10s; }
+        .note7 { left: 90%; top: 90%; font-size: 20px; animation-delay: 12s; }
+
+        @keyframes floatNotes {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; } /* 慢慢出现 */
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; } /* 飘到顶部消失并旋转 */
         }
         .screen { padding: 45px 25px; flex: 1; display: flex; flex-direction: column; animation: fadeIn 0.8s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
