@@ -18,21 +18,45 @@
         
         body { 
             margin: 0; 
+            
             background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
             display: flex; justify-content: center; min-height: 100vh;
         }
 
-        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-
         #app { 
-            width: 100%; max-width: 450px; background: rgba(255, 255, 255, 0.94); 
+            width: 100%; max-width: 450px; 
+         
+            background: 
+            
+                linear-gradient(rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.94)),
+          
+                repeating-linear-gradient(
+                    transparent, 
+                    transparent 100px, 
+                    rgba(108, 92, 231, 0.05) 100px, 
+                    rgba(108, 92, 231, 0.05) 101px,
+                    transparent 105px, 
+                    rgba(108, 92, 231, 0.05) 105px, 
+                    rgba(108, 92, 231, 0.05) 106px,
+                    transparent 110px, 
+                    rgba(108, 92, 231, 0.05) 110px, 
+                    rgba(108, 92, 231, 0.05) 111px,
+                    transparent 115px, 
+                    rgba(108, 92, 231, 0.05) 115px, 
+                    rgba(108, 92, 231, 0.05) 116px,
+                    transparent 120px, 
+                    rgba(108, 92, 231, 0.05) 120px, 
+                    rgba(108, 92, 231, 0.05) 121px
+                );
+            background-size: 100% 100%, 100% 160px; /* 控制五线谱的循环间隔 */
+            
             min-height: 100vh; display: flex; flex-direction: column; 
-            box-shadow: 0 10px 50px rgba(0,0,0,0.2); position: relative;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.2); 
+            position: relative;
             backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
         }
-
         .screen { padding: 45px 25px; flex: 1; display: flex; flex-direction: column; animation: fadeIn 0.8s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         .hidden { display: none !important; }
